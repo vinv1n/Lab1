@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c9c9c9"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create New Task"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        />
+
+    <NumberPicker
+        android:id="@+id/priorityLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeText"
+        />
+    <EditText
+        android:id="@+id/taskText"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        app:layout_constraintTop_toBottomOf="@id/priorityLevel"
+        />
+    <Button
+        android:layout_margin="10sp"
+        android:id="@+id/finishTask"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="OK"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/roundedbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <Button
+        android:layout_margin="10sp"
+        android:id="@+id/dateButton"
+        android:layout_width="match_parent"
+        android:text="Pick Date"
+        android:layout_height="50sp"
+        android:background="@drawable/roundedbutton"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/taskText"
+        />
+
+</android.support.constraint.ConstraintLayout>
