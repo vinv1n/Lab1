@@ -40,23 +40,49 @@ public class LoginActivity extends AppCompatActivity{
                    Toast.makeText(getApplicationContext(), "Too short username or password",
                            Toast.LENGTH_LONG).show();
                } else {
-                   startMain(username.getText().toString(),
+                   stopActivity(username.getText().toString(),
                            password.getText().toString());
                }
            }
        });
     }
 
-    private void startMain(String username, String password) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("username", username);
+    private void stopActivity(String username, String password) {
+        Intent intent = new Intent();
         intent.putExtra("password", password);
-        startActivity(intent);
+        intent.putExtra("username", username);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
     @Override
     protected void onPause() {
         finish();
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

@@ -11,4 +11,11 @@
 
     <string name="new_payment">New Payment</string>
     <string name="Payment_history">Payment History</string>
+
+    <string name="recipient_name">Recipient name:</string>
+    <string name="recipient_account">Recipient account:</string>
+    <string name="payment_info">Payment information:</string>
+    <string name="date">Date</string>
+    <string name="amount">Amount</string>
+    <string name="accept">Accept</string>
 </resources>
