@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Lab1</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login">Login</string>
+    <string name="Main_text">Account</string>
+    <string name="Payment_details">Payments</string>
+
+    <string name="My_account">my information</string>
+    <string name="bank">bank details</string>
+
+    <string name="new_payment">New Payment</string>
+    <string name="Payment_history">Payment History</string>
+</resources>
