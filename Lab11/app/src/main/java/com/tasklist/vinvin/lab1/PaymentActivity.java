@@ -41,20 +41,9 @@ public class PaymentActivity extends Activity{
     }
     private void stopActivity(){
         Intent intent = new Intent();
-        intent.putExtra("id", generateID());
+        intent.putExtra("id", 1);
         setResult(Activity.RESULT_OK, intent);
         finish();
-    }
-
-    private String generateID(){
-
-        Random rand = new Random();
-
-        StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < 10; i++){
-            builder.append(rand.nextInt(9));
-        }
-        return builder.toString();
     }
 
     @Override

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             Toast.makeText(getApplicationContext(),
-                    "Payment ID: " + data.getStringExtra("id"), Toast.LENGTH_LONG).show();
+                    "Result: " + data.getStringExtra("id"), Toast.LENGTH_LONG).show();
         }
     }
 }
