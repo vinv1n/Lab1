@@ -1,6 +1,7 @@
 package com.tasklist.vinvin.lab2;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -8,13 +9,11 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.DialerKeyListener;
+import android.text.method.KeyListener;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-/**
- *
- * Created by vinvin on 30.1.2018.
- */
 
 public class SensorActivity extends Activity
         implements SensorEventListener {
@@ -22,7 +21,10 @@ public class SensorActivity extends Activity
     private Sensor magnet;
     private Sensor acc;
     private SensorManager manager;
-    TextView sensorValues;
+
+    private TextView sensorValues;
+    private TextView sensorName;
+
 
 
     @Override
@@ -35,10 +37,12 @@ public class SensorActivity extends Activity
         manager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         sensorValues = (TextView) findViewById(R.id.values);
+        sensorName = (TextView) findViewById(R.id.SensorType);
+
 
         try {
 
-            magnet = manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+            magnet = manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED);
 
         } catch (NullPointerException e) {
 
@@ -53,7 +57,10 @@ public class SensorActivity extends Activity
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED){
+            updateView(event);
+        } else {
+            // this is not really needed, but is here anyways
             updateView(event);
         }
 
@@ -64,11 +71,12 @@ public class SensorActivity extends Activity
 
         float[] values = event.values;
 
-        for(float value : values){
-            builder.append(value);
-            builder.append("\n");
-        }
+        double result = Math.sqrt(Math.pow(values[0], 2) + Math.pow(values[1], 2)
+                + Math.pow(values[2], 2));
 
+        builder.append(Math.round(result));
+
+        sensorName.setText("Sensor type: " + magnet.getName());
         sensorValues.setText(builder);
     }
 
@@ -84,5 +92,11 @@ public class SensorActivity extends Activity
         super.onResume();
         manager.registerListener(this, manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
                 SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.exit(1);
     }
 }
