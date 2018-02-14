@@ -1,17 +1,28 @@
 package com.tasklist.vinvin.lab3;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.JsonReader;
 import android.util.Log;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+import java.util.prefs.Preferences;
 
 /**
  *
@@ -21,7 +32,6 @@ import java.net.URL;
 public class WeatherReader extends IntentService {
 
     private String basic_uri = "http://api.openweathermap.org/data/2.5/weather";
-    private SharedPreferences sharedPreferences;
 
     public WeatherReader(){
         super("WeatherService");
@@ -29,7 +39,6 @@ public class WeatherReader extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-
 
         try {
 
@@ -55,16 +64,10 @@ public class WeatherReader extends IntentService {
                     Stringbuilder.append(line);
                 }
 
-                bufferedReader.close();
-
-                sharedPreferences.edit()
-                        .putString("response", Stringbuilder.toString())
-                        .apply();
-
             }
 
         } catch (Exception e){
-            Log.e("error", e.getMessage());
+            System.exit(1);
         }
     }
     private String buildUri(){
@@ -74,5 +77,24 @@ public class WeatherReader extends IntentService {
         builder.appendQueryParameter("city", city);
 
         return builder.toString();
+    }
+
+    @Override
+    public void onDestroy() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+
+        Intent intent = new Intent(getApplicationContext(), SetAlarm.class);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                1000*60*10, pendingIntent);
+    }
+
+    @Override
+    public void onStart(@Nullable Intent intent, int startId) {
+        super.onStart(intent, startId);
     }
 }

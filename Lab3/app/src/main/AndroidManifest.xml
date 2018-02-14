@@ -21,7 +21,14 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".WeatherReader"/>
+        <activity android:name=".NotificationActivity"/>
+
+        <service android:name=".WeatherReader"
+            android:exported="false"/>
+
+        <receiver android:name=".SetAlarm"
+            android:process=":remote"
+            />
 
     </application>
 
