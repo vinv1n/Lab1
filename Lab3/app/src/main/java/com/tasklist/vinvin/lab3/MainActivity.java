@@ -45,12 +45,13 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
-        Intent intent = new Intent(getApplicationContext(), SetAlarm.class);
+        Intent intent = new Intent(getApplicationContext(), WeatherReader.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 100,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                1000*60*30, pendingIntent);
     }
 
     private void ensurePermissions(){

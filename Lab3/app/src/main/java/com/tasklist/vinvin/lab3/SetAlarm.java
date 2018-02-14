@@ -7,23 +7,30 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
- *
  * Created by vinvin on 14.2.2018.
  */
 
 public class SetAlarm extends BroadcastReceiver {
 
+    SharedPreferences preferences;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent intent1 = new Intent(context, WeatherReader.class);
         context.startService(intent1);
+
+        String response = preferences.getString("response", "");
 
         Intent notificationIntent = new Intent(context, NotificationActivity.class);
 

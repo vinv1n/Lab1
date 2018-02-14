@@ -14,13 +14,9 @@ import android.widget.TextView;
 
 public class NotificationActivity extends Activity {
 
-    SharedPreferences preferences;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        TextView view = (TextView) findViewById(R.id.main_text);
-        view.setText(preferences.getString("response", ""));
         setContentView(R.layout.activity_main);
     }
 }

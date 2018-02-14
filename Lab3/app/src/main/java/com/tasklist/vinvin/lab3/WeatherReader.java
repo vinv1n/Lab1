@@ -43,7 +43,7 @@ public class WeatherReader extends IntentService {
         try {
 
             URL ulr = new URL("http://api.openweathermap.org/data/2.5/forecast?id=524901&A" +
-                    "PPID=7c4f7f159556bc489598c5b219a5fa02");
+                    "PPID=7c4f7f159556bc489598c5b219a5fa02,id=Oulu,fi");
 
             HttpURLConnection connection = (HttpURLConnection) ulr.openConnection();
 
@@ -63,7 +63,12 @@ public class WeatherReader extends IntentService {
                 while ((line = bufferedReader.readLine()) != null) {
                     Stringbuilder.append(line);
                 }
+                Log.i("q", Stringbuilder.toString());
 
+                SharedPreferences preferences = (SharedPreferences)
+                        getSharedPreferences("response", 0);
+                preferences.edit()
+                        .putString("response", Stringbuilder.toString()).apply();
             }
 
         } catch (Exception e){
