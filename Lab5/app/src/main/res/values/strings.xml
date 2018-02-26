@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab5</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="app_key_consumer">jLGYx6I5aFoJTsEKPg6IJy6Vm</string>
+    <string name="app_key_secret">MQ1yUOHquKYdY8YqEQgHldoM4uJDAH3tSXhihgBStwIqBcwIe1</string>
+    <string name="access_token"> 968179751046303745-x2koXSJLdedaY9hJ9r3wzbhMnRxJhGL</string>
+    <string name="access_token_secret">Rievv80AYYp81NVbQSIkLGcYbjaeX8itDIDobr1wrLy6W</string>
+</resources>
